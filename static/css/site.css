@@ -1,0 +1,191 @@
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.intro {
+    background:url("https://www.cheatsheet.com/wp-content/uploads/2021/10/rory-gilmore-girls-stars-hollow-books.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.second {
+    background:linear-gradient(rgba( 0, 0, 0, 0.5), rgba( 0, 0, 0, 0.5)), url("https://images.pexels.com/photos/235767/pexels-photo-235767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat center center fixed;
+    background-size: cover;
+    padding:2%;
+}
+
+
+body {
+    color: white;
+}
+
+.child {
+    background-color: rgb(165, 42, 42, 0.8);
+    color: white;
+    padding: 2%;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.alt_child {
+    background-color: rgb(165, 42, 42, 0);
+}
+
+.flash-msg {
+    position: fixed;
+    display: block;
+    margin-bottom: 18%;
+    background-color: rgb(165, 42, 42, 0.8);
+    padding: 0.5%;
+    border-radius: 10px;
+}
+
+a {
+    color:rgb(200, 144, 39)
+}
+nav {
+    list-style:none;
+    margin:0;
+    padding:0;
+    z-index : 10000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    text-align: right;
+}
+
+nav ul { 
+    display: block;
+    width: 100%;
+    padding: 0;
+    padding-top: 2vh;
+}
+
+nav li {
+    display:inline;
+}
+nav a {
+    display: inline-block;
+    background-color: brown;
+    border-radius: 25px;
+    color:rgb(254, 254, 254);
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-right: 2%;
+}
+
+nav a:hover{
+    background-color:rgb(200, 144, 39);
+    color:white;
+    border-radius: 25px;
+}
+
+/* scroll code adapted from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp */
+.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+    padding: 2%;
+  }
+  
+.scrollmenu > .col {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.scrollmenu > .col:hover {
+    background-color: rgb(165, 42, 42, 0.8);
+    transform: scale(1.1); 
+}
+
+img {
+    display: inline-block;
+    position: relative;
+    height: 196px;
+    width: 125px;
+}
+
+.book_card {
+    background-color: rgba(195, 138, 91, 0.7);
+    border-radius: 5px;
+    width: 191px;
+    height: 330px;
+    display: inline-block;
+
+}
+
+.book_card:hover {
+    background-color: rgb(165, 42, 42);
+}
+
+.book_title {
+    color: white ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.author_name {
+    color: white ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.title {
+    background-color: rgb(165, 42, 42);
+    border-radius: 15px;
+    margin-top: 7vh;
+}
+
+.list {
+    background-color: rgb(165, 42, 42);
+    border-radius: 15px;
+    margin: 2%;
+    padding: 0.5%;
+    padding-left: 2%;
+}
+
+button {
+    background-color: rgb(165, 42, 42);
+    border-radius: 15px;
+    border-color: rgba(148, 84, 92, 0.5);
+    color: white;
+}
+
+button:hover{
+    background-color: rgba(195, 138, 91);
+    border-color: rgba(148, 84, 92, 0.5);
+}
+
+progress {
+    border: rgb(250, 151, 70);
+    width: 130px;
+    height: 15px;
+  }
+
+progress::-webkit-progress-value {
+    background: rgb(250, 151, 70);
+}
+
+progress::-webkit-progress-bar {
+    background: rgb(255, 255, 255);
+}
+
+.input_btn {
+    background-color: rgb(234, 234, 234);
+    color: black;
+    border-color: rgb(109, 109, 109);
+    fon
+}
+
+@media screen and (max-width: 991px) {
+    .title {
+        margin-top: 70px;
+        text-align: center;
+    }
+}
