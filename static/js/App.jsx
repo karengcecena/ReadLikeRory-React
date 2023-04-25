@@ -1,3 +1,5 @@
+"use strict";
+
 const Router = ReactRouterDOM.BrowserRouter;
 const Route = ReactRouterDOM.Route;
 const Switch = ReactRouterDOM.Switch;
@@ -13,8 +15,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <HomePage/>
+        </Route>
+        <Route path="/create_account_page">
+          <CreateAccountPage/>
+        </Route>
+        <Route path="/login_page">
+          <LoginPage/>
         </Route>
       </Switch>
     </Router>

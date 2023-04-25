@@ -13,7 +13,8 @@ app = Flask(__name__)
 app.secret_key = "secret_session"
 # app.jinja_env.undefined = StrictUndefined
 
-
+@app.route("/login_page")
+@app.route("/create_account_page")
 @app.route("/")
 def homepage():
     """View homepage."""
@@ -23,71 +24,59 @@ def homepage():
 
     return render_template("index.html")
 
-# @app.route("/create_account_page")
-# def view_create_account():
-#     """Allows user to view create an account page"""
+@app.route("/create_account", methods=["POST"])
+def create_account():
+    """Registers user and adds all books to to be read"""
 
-#     return render_template("create_account.html")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    # to hash the password 
+    password_hashed = argon2.hash(password)
 
-# @app.route("/create_account", methods=["POST"])
-# def create_account():
-#     """Registers user and adds all books to to be read"""
+    if crud.get_user_by_username(username):
+        flash("Sorry, that username is already taken.")
 
-#     username = request.form.get("username")
-#     password = request.form.get("password")
-#     # to hash the password 
-#     password_hashed = argon2.hash(password)
+    else:
+        user = crud.create_user(username=username, password=password_hashed)
 
-#     if crud.get_user_by_username(username):
-#         flash("Sorry, that username is already taken.")
+        db.session.add(user)
+        db.session.commit()
 
-#     else:
-#         user = crud.create_user(username=username, password=password_hashed)
+        books = crud.get_all_books()
 
-#         db.session.add(user)
-#         db.session.commit()
-
-#         books = crud.get_all_books()
-
-#         for book in books: 
-#             book_folder = crud.add_to_ToBeReadList(book.book_id, user)
+        for book in books: 
+            book_folder = crud.add_to_ToBeReadList(book.book_id, user)
             
-#             db.session.add(book_folder)
-#             db.session.commit()
-#         # session["username"] = username
+            db.session.add(book_folder)
+            db.session.commit()
+        # session["username"] = username
 
-#         return redirect("/login_page")
+        return redirect("/login_page")
 
-#     return redirect ("/")
+    return redirect ("/")
 
-# @app.route("/login_page")
-# def view_login():
-#     """Allows user to view login page"""
+@app.route("/login", methods=["POST"])
+def login_user():
+    """Logs the user in"""
 
-#     return render_template("login.html")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = crud.get_user_by_username(username)
 
-# @app.route("/login", methods=["POST"])
-# def login_user():
-#     """Logs the user in"""
+    if user:
 
-#     username = request.form.get("username")
-#     password = request.form.get("password")
-#     user = crud.get_user_by_username(username)
-
-#     if user:
-
-#         # verify hashed password input is equal to one in DB
-#         if argon2.verify(password, user.password):
-#             session["username"] = user.username
-#             return redirect ("/user_profile")
+        # verify hashed password input is equal to one in DB
+        if argon2.verify(password, user.password):
+            session["username"] = user.username
+            return redirect ("/user_profile")
         
-#         else:
-#             flash("Your password was incorrect. Please try again.")
+        else:
+            flash("Your password was incorrect. Please try again.")
 
-#     else:
-#         flash("Sorry, a user with that username doesn't exist")
+    else:
+        flash("Sorry, a user with that username doesn't exist")
 
-#     return redirect("/")
+    return redirect("/")
 
 # @app.route("/user_profile")
 # def display_user_profile():
@@ -146,17 +135,17 @@ def homepage():
 
 #     return redirect("/user_profile")
 
-# @app.route("/logout")
-# def logout_user():
-#     """Logs out the user by clearing the session."""
+@app.route("/logout")
+def logout_user():
+    """Logs out the user by clearing the session."""
     
-#     if "username" in session: 
-#         session.clear()
+    if "username" in session: 
+        session.clear()
  
-#     else:
-#         return redirect("/")
+    else:
+        return redirect("/")
     
-#     return redirect("/")
+    return redirect("/")
 
 if __name__ == '__main__':
     connect_to_db(app)
