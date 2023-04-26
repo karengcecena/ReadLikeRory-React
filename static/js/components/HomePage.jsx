@@ -1,6 +1,6 @@
 "use strict";
 
-const Link = ReactRouterDOM.Link;
+// const Link = ReactRouterDOM.Link;
 
 function HomePage() {
     return (

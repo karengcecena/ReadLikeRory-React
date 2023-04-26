@@ -5,6 +5,10 @@
     min-height: 100vh;
 }
 
+.alt_parent {
+    min-height: 100vh;
+}
+
 .intro {
     background:url("https://www.cheatsheet.com/wp-content/uploads/2021/10/rory-gilmore-girls-stars-hollow-books.jpg") no-repeat center center fixed;
     background-size: cover;

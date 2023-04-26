@@ -3,15 +3,17 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const Route = ReactRouterDOM.Route;
 const Switch = ReactRouterDOM.Switch;
+const useState = React.useState;
+const useEffect = React.useEffect;
 // const Redirect = ReactRouterDOM.Redirect;
-// const Link = ReactRouterDOM.Link;
+const Link = ReactRouterDOM.Link;
 // const Prompt = ReactRouterDOM.Prompt;
 // const useHistory = ReactRouterDOM.useHistory;
 // const useParams = ReactRouterDOM.useParams;
 
-// import HomePage from './components/HomePage';
 
 function App() {
+
   return (
     <Router>
       <Switch>
@@ -24,6 +26,9 @@ function App() {
         <Route path="/login_page">
           <LoginPage/>
         </Route>
+        <Route path="/user_login">
+          <UserProfilePage/>
+      </Route>
       </Switch>
     </Router>
   );

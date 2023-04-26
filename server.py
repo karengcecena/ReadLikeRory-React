@@ -1,7 +1,7 @@
 """Server for Read Like Rory."""
 
-from flask import (Flask, render_template, request, flash, session,redirect)
-from model import connect_to_db, db
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from model import connect_to_db, db, Book
 import crud
 
 # from jinja2 import StrictUndefined
@@ -9,10 +9,14 @@ import crud
 # import for hashing passwords
 from passlib.hash import argon2
 
+import json
+
 app = Flask(__name__)
 app.secret_key = "secret_session"
 # app.jinja_env.undefined = StrictUndefined
 
+# @app.route("/user_profile_page")
+@app.route("/user_login")
 @app.route("/login_page")
 @app.route("/create_account_page")
 @app.route("/")
@@ -20,7 +24,7 @@ def homepage():
     """View homepage."""
 
     # if "username" in session:
-    #     return redirect("/user_profile")
+    #     return redirect("/user_profile_page")
 
     return render_template("index.html")
 
@@ -49,7 +53,6 @@ def create_account():
             
             db.session.add(book_folder)
             db.session.commit()
-        # session["username"] = username
 
         return redirect("/login_page")
 
@@ -68,7 +71,8 @@ def login_user():
         # verify hashed password input is equal to one in DB
         if argon2.verify(password, user.password):
             session["username"] = user.username
-            return redirect ("/user_profile")
+            # return redirect ("/user_profile_info")
+            return redirect ("/user_login")
         
         else:
             flash("Your password was incorrect. Please try again.")
@@ -78,20 +82,26 @@ def login_user():
 
     return redirect("/")
 
-# @app.route("/user_profile")
-# def display_user_profile():
-#     """Displays the user profile page"""
+@app.route("/user_profile_info")
+def display_user_profile():
+    """Displays the user profile page"""
     
-#     user_username = session["username"]
-#     user = crud.get_user_by_username(user_username)
+    user_username = session["username"]
+    user = crud.get_user_by_username(user_username)
 
-#     count = 0 
+    count = 0 
+    read_list = crud.get_all_ReadList(user)
+    to_be_read_list = crud.get_all_ToBeReadList(user)
 
-#     for book in crud.get_all_ReadList(user):
-#         count += 1
+    read_list_dict = [crud.list_to_dict(r) for r in read_list]
+    to_be_read_list_dict = [crud.list_to_dict(t) for t in to_be_read_list],
+
+    for book in crud.get_all_ReadList(user):
+        count += 1
         
-#     percent = (count/86)*100
-#     return render_template("user_profile.html", user=user, percent=int(percent))
+    percent = (count/86)*100
+    return jsonify({"username": user_username, "percent": percent, "readlist": read_list_dict, "tobereadlist": to_be_read_list_dict, "user_id": user.user_id})
+  
 
 # @app.route("/user_profile/read", methods=["POST"])
 # def remove_from_to_be_read():

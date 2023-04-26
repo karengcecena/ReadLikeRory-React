@@ -47,3 +47,18 @@ def get_all_ReadList(user):
     """Returns users read list"""
 
     return ReadList.query.filter(ReadList.user_id == user.user_id).all()
+
+def get_all_ToBeReadList(user):
+    """Returns users read list"""
+
+    return ToBeReadList.query.filter(ToBeReadList.user_id == user.user_id).all()
+
+def list_to_dict(list):
+    """Returns read and to be read lists as dictionaries for json formatting"""
+    
+    return {
+        'book_id': list.book_id,
+        'title': Book.query.get(list.book_id).title,
+        'author' : Book.query.get(list.book_id).author,
+        'poster_path': Book.query.get(list.book_id).poster_path,
+    }
