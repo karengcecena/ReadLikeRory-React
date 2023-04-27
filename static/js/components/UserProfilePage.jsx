@@ -35,7 +35,7 @@ function UserProfilePage() {
         .then(response => response.json())
         .then(data => {
             setCurrentUsername(data.username);
-            setCurrentPercent(data.percent);
+            setCurrentPercent(data.percent.toFixed(0));
             setReadList(data.readlist);
             setToBeReadList(data.tobereadlist[0]);          
         })
@@ -90,11 +90,11 @@ function UserProfilePage() {
         if (currentListName === 'readlist') {
             setReadList(updatedCurrentList);
             setToBeReadList(updatedNewList);
-            setCurrentPercent((readlist.length - 1)/(readlist.length + tobereadlist.length)*100);
+            setCurrentPercent(((readlist.length - 1)/(readlist.length + tobereadlist.length)*100)).toFixed(0);
         } else {
             setToBeReadList(updatedCurrentList);
             setReadList(updatedNewList);
-            setCurrentPercent((readlist.length + 1)/(readlist.length + tobereadlist.length)*100);
+            setCurrentPercent(((readlist.length + 1)/(readlist.length + tobereadlist.length)*100).toFixed(0));
         }
 
 
