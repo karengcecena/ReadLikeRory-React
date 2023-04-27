@@ -1,8 +1,8 @@
-# 📚 ReadLikeRory
+# 📚 ReadLikeRory V.2
 
 ## 📖 Summary 
 
-**ReadLikeRory** is a full-stack web app where book lovers and Gilmore Girls fans can create an account that automatically adds Rory’s Read List to their To Be Read Books, then add them to their Read List once read.
+**ReadLikeRory V.2** is a full-stack web app where book lovers and Gilmore Girls fans can create an account that automatically adds Rory’s Read List to their To Be Read Books, then add them to their Read List once read. I recreated the front-end of this project with the framework React. 
 
 ## 📋 Content
 * [Deployment](#deployment)
@@ -15,14 +15,16 @@
 
 ## 🌐 <a name="deployment"></a>Deployment
 
-Deployed using AWS Lightsail
+* Deployed using AWS Lightsail
 
-Check out ReadLikeRory's [Website](http://34.217.109.198/)
+* Check out ReadLikeRory V.2's [Website]()
+
+* ReadLikeRory V.1's [GitHub](https://github.com/karengcecena/ReadLikeRory)
 
 
 ## 🪐 <a name="aboutme"></a>About the Developer
 
-ReadLikeRory was created by Karen G. Cecena. Learn more about the developer on [LinkedIn](https://www.linkedin.com/in/karengcecena).
+ReadLikeRory V.2 was created by Karen G. Cecena. Learn more about the developer on [LinkedIn](https://www.linkedin.com/in/karengcecena).
 
 
 ## 💻 <a name="technologies"></a>Technologies
@@ -32,10 +34,10 @@ ReadLikeRory was created by Karen G. Cecena. Learn more about the developer on [
 - Python
 - Flask
 - PostgreSQL
+- ReactJS
 - HTML5
 - CSS3
 - Bootstrap
-- Jinja
 
 
 ## 🔍 <a name="features"></a>Features
@@ -46,15 +48,15 @@ A new user can create an account which automatically populates that users To Be 
 
 <br>
 
-![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/video2a.gif "ReadLikeRory Profile Page")
+![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/user_prof1.gif "ReadLikeRory Profile Add")
 
-After creating an account, a user can log in and see their profile. In their profile, a user can add the books they have already read to their Read List via the "Mark as Read" button. This will remove the book from the TBR list and add it below. 
+After creating an account, a user can log in and see their profile. In their profile, a user can add the books they have already read to their Read List via the "Mark as Read" button. This will remove the book from the TBR list and add it to the Read List below dynamically. This will also dynamically update the percentage bar at the top. 
 
 <br>
 
-![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/video2b.gif "ReadLikeRory Profile Page Progress Bar")
+![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/user_prof2.gif "ReadLikeRory Profile Page Remove")
 
-Similarly, users can remove books they have read if they want to re-read it. A user's reading progress is tracked above so the user knows how close they are to completing the ReadLikeRory challenge.
+Similarly, users can remove dynamically books they have read via the "Mark as To Be Read" if they want to add it to the TBR to re-read it. 
 
 
 ## 🗂️ <a name="databasemodel"></a>Database Model

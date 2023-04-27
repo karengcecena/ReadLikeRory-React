@@ -90,7 +90,7 @@ function UserProfilePage() {
         if (currentListName === 'readlist') {
             setReadList(updatedCurrentList);
             setToBeReadList(updatedNewList);
-            setCurrentPercent(((readlist.length - 1)/(readlist.length + tobereadlist.length)*100)).toFixed(0);
+            setCurrentPercent(((readlist.length - 1)/(readlist.length + tobereadlist.length)*100).toFixed(0));
         } else {
             setToBeReadList(updatedCurrentList);
             setReadList(updatedNewList);
