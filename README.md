@@ -42,19 +42,19 @@ ReadLikeRory V.2 was created by Karen G. Cecena. Learn more about the developer 
 
 ## 🔍 <a name="features"></a>Features
 
-![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/video1.gif "ReadLikeRory Login")
+![alt text](https://github.com/karengcecena/ReadLikeRory-React/blob/main/static/img/video1.gif "ReadLikeRory Login")
 
 A new user can create an account which automatically populates that users To Be Read List with Rory Gilmore's (actual) Read List in the show Gilmore Girls. Creating an account utilizes password hashing to maintain user security. 
 
 <br>
 
-![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/user_prof1.gif "ReadLikeRory Profile Add")
+![alt text](https://github.com/karengcecena/ReadLikeRory-React/blob/main/static/img/user_prof1.gif "ReadLikeRory Profile Add")
 
 After creating an account, a user can log in and see their profile. In their profile, a user can add the books they have already read to their Read List via the "Mark as Read" button. This will remove the book from the TBR list and add it to the Read List below dynamically. This will also dynamically update the percentage bar at the top. 
 
 <br>
 
-![alt text](https://github.com/karengcecena/ReadLikeRory/blob/main/static/img/user_prof2.gif "ReadLikeRory Profile Page Remove")
+![alt text](https://github.com/karengcecena/ReadLikeRory-React/blob/main/static/img/user_prof2.gif "ReadLikeRory Profile Page Remove")
 
 Similarly, users can remove dynamically books they have read via the "Mark as To Be Read" if they want to add it to the TBR to re-read it. 
 
