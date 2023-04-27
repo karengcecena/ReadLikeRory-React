@@ -5,11 +5,7 @@ const Route = ReactRouterDOM.Route;
 const Switch = ReactRouterDOM.Switch;
 const useState = React.useState;
 const useEffect = React.useEffect;
-// const Redirect = ReactRouterDOM.Redirect;
 const Link = ReactRouterDOM.Link;
-// const Prompt = ReactRouterDOM.Prompt;
-// const useHistory = ReactRouterDOM.useHistory;
-// const useParams = ReactRouterDOM.useParams;
 
 
 function App() {

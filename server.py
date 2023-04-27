@@ -1,30 +1,21 @@
 """Server for Read Like Rory."""
 
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
-from model import connect_to_db, db, Book
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from model import connect_to_db, db
 import crud
-
-# from jinja2 import StrictUndefined
 
 # import for hashing passwords
 from passlib.hash import argon2
 
-import json
-
 app = Flask(__name__)
 app.secret_key = "secret_session"
-# app.jinja_env.undefined = StrictUndefined
 
-# @app.route("/user_profile_page")
 @app.route("/user_login")
 @app.route("/login_page")
 @app.route("/create_account_page")
 @app.route("/")
 def homepage():
     """View homepage."""
-
-    # if "username" in session:
-    #     return redirect("/user_profile_page")
 
     return render_template("index.html")
 
@@ -71,7 +62,6 @@ def login_user():
         # verify hashed password input is equal to one in DB
         if argon2.verify(password, user.password):
             session["username"] = user.username
-            # return redirect ("/user_profile_info")
             return redirect ("/user_login")
         
         else:
@@ -89,75 +79,61 @@ def display_user_profile():
     user_username = session["username"]
     user = crud.get_user_by_username(user_username)
 
-    count = 0 
     read_list = crud.get_all_ReadList(user)
     to_be_read_list = crud.get_all_ToBeReadList(user)
 
     read_list_dict = [crud.list_to_dict(r) for r in read_list]
     to_be_read_list_dict = [crud.list_to_dict(t) for t in to_be_read_list],
 
-    for book in crud.get_all_ReadList(user):
-        count += 1
+    count =  len(read_list)
+    total = len(read_list) + len(to_be_read_list)
         
-    percent = (count/86)*100
+    percent = (count/total)*100
+
     return jsonify({"username": user_username, "percent": percent, "readlist": read_list_dict, "tobereadlist": to_be_read_list_dict, "user_id": user.user_id})
   
+@app.route("/user_profile/update_list", methods=["PUT"])
+def update_lists():
+    """Removes and Adds from To Be Read List to Read List and Vise Versa"""
 
-# @app.route("/user_profile/read", methods=["POST"])
-# def remove_from_to_be_read():
-#     """Removes from to be read and adds to read"""
+    user_username = request.get_json().get("username")
+    user = crud.get_user_by_username(user_username)
 
-#     book_id = request.form.get("book_id")
+    book_id = request.get_json().get("book_id")
+    list_name = request.get_json().get("current_list_name")
 
-#     user_username = session["username"]
-#     user = crud.get_user_by_username(user_username)
+    if list_name == "readlist":
+        # remove from read list
+        book_list = crud.get_ReadList_book_by_id(book_id, user)
+        db.session.delete(book_list)
+        db.session.commit()
 
-#     # remove from to be read list
-#     book_list = crud.get_ToBeReadList_book_by_id(book_id, user)
-#     db.session.delete(book_list)
-#     db.session.commit()
+        # add to to be read list
+        book_list = crud.add_to_ToBeReadList(book_id, user)
+        db.session.add(book_list)
+        db.session.commit()
 
-#     # add to read list
-#     book_list = crud.add_to_ReadList(book_id, user)
-#     db.session.add(book_list)
-#     db.session.commit()
+    if list_name == "tobereadlist":
+        # remove from to be read list
+        book_list = crud.get_ToBeReadList_book_by_id(book_id, user)
+        db.session.delete(book_list)
+        db.session.commit()
 
-#     return redirect("/user_profile")
+        # add to read list
+        book_list = crud.add_to_ReadList(book_id, user)
+        db.session.add(book_list)
+        db.session.commit()
 
-# @app.route("/user_profile/unread", methods=["POST"])
-# def remove_from_read():
-#     """Removes from read and adds to to be read"""
-
-#     book_id = request.form.get("book_id")
-
-#     user_username = session["username"]
-#     user = crud.get_user_by_username(user_username)
-
-#     # remove from read list
-#     book_list = crud.get_ReadList_book_by_id(book_id, user)
-#     db.session.delete(book_list)
-#     db.session.commit()
-
-#     # add to to be read list
-#     book_list = crud.add_to_ToBeReadList(book_id, user)
-#     db.session.add(book_list)
-#     db.session.commit()
-
-#     return redirect("/user_profile")
+    return jsonify(success=True)
 
 @app.route("/logout")
 def logout_user():
     """Logs out the user by clearing the session."""
-    
-    if "username" in session: 
-        session.clear()
- 
-    else:
-        return redirect("/")
+
+    session.clear()
     
     return redirect("/")
 
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(debug=True)
-
