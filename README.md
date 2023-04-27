@@ -17,7 +17,7 @@
 
 * Deployed using AWS Lightsail
 
-* Check out ReadLikeRory V.2's [Website]()
+* Check out ReadLikeRory V.2's [Website](35.164.68.219)
 
 * ReadLikeRory V.1's [GitHub](https://github.com/karengcecena/ReadLikeRory)
 
