@@ -5,16 +5,16 @@ function BookCard(props) {
 
     return (
         <div className="col book_card" id={bookId}>
-        <div className="book_title">{title}</div>
-        <img className="poster_img" src={posterPath} />
-        <div className="author_name">By: {author}</div>
-        <button
-            type="button"
-            className="read-btn"
-            onClick={() => handleMoveBook(bookId, currentListName)}
-        >
-            {currentListName === 'readlist' ? 'Mark as To Be Read' : 'Mark as Read'}
-        </button>
+            <div className="book_title">{title}</div>
+            <img className="poster_img" src={posterPath} />
+            <div className="author_name">By: {author}</div>
+            <button
+                type="button"
+                className="read-btn"
+                onClick={() => handleMoveBook(bookId, currentListName)}
+            >
+                {currentListName === 'readlist' ? 'Mark as To Be Read' : 'Mark as Read'}
+            </button>
         </div>
     );
   }
@@ -22,7 +22,6 @@ function BookCard(props) {
 function UserProfilePage() {
     
     const [currentUsername, setCurrentUsername] = useState(null);
-    // const [currentUserID, setCurrentUserID] = useState(null);
     const [currentPercent, setCurrentPercent] = useState(0);
     const [readlist, setReadList] = useState([]);
     const [tobereadlist, setToBeReadList] = useState([]);
@@ -38,24 +37,7 @@ function UserProfilePage() {
             setCurrentUsername(data.username);
             setCurrentPercent(data.percent);
             setReadList(data.readlist);
-            setToBeReadList(data.tobereadlist[0]);
-
-            // if (data.readlist && data.readlist.length > 0) {
-            //     // console.log(data.readlist);
-            //     setReadList(data.readlist);
-            // } else {
-            //     setReadList([]);
-            // }
-
-            // if (data.tobereadlist && data.tobereadlist.length > 0) {
-            //     console.log(data.readlist);   
-            //     setToBeReadList(data.tobereadlist[0]);
-            // } else {
-            //     setToBeReadList([]);
-            // }
-
-            // setCurrentUserID(data.user_id);
-            
+            setToBeReadList(data.tobereadlist[0]);          
         })
         .catch(error => console.error(error));
   }, []);
@@ -78,14 +60,14 @@ function UserProfilePage() {
     if (readlist) {
         for (const currentBookCard of readlist) {
             ReadListBookCards.push(
-            <BookCard
-                bookId={currentBookCard.book_id}
-                title={currentBookCard.title}
-                author={currentBookCard.author}
-                posterPath={currentBookCard.poster_path}
-                currentListName="readlist"
-                handleMoveBook={handleMoveBook}
-            />,
+                <BookCard
+                    bookId={currentBookCard.book_id}
+                    title={currentBookCard.title}
+                    author={currentBookCard.author}
+                    posterPath={currentBookCard.poster_path}
+                    currentListName="readlist"
+                    handleMoveBook={handleMoveBook}
+                />,
             );
         }
     }
@@ -103,7 +85,6 @@ function UserProfilePage() {
 
         // Add the book to the new list
         const updatedNewList = [...newList, bookToMove];
-        // console.log(updatedNewList);
 
         // Update the state with the new lists
         if (currentListName === 'readlist') {
@@ -122,7 +103,6 @@ function UserProfilePage() {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                // user_id: currentUserId,
                 username: currentUsername,
                 book_id: bookId,
                 current_list_name: currentListName
