@@ -1,6 +1,7 @@
 "use strict";
 
 function BookCard(props) {
+    // Destructure the props object to get the necessary data
     const { bookId, title, author, posterPath, currentListName, handleMoveBook } = props;
 
     return (
@@ -13,6 +14,7 @@ function BookCard(props) {
                 className="read-btn"
                 onClick={() => handleMoveBook(bookId, currentListName)}
             >
+                {/* Display different text based on the current list */}
                 {currentListName === 'readlist' ? 'Mark as To Be Read' : 'Mark as Read'}
             </button>
         </div>
@@ -20,16 +22,17 @@ function BookCard(props) {
   }
 
 function UserProfilePage() {
-    
+    // State variables
     const [currentUsername, setCurrentUsername] = useState(null);
     const [currentPercent, setCurrentPercent] = useState(0);
     const [readlist, setReadList] = useState([]);
     const [tobereadlist, setToBeReadList] = useState([]);
 
+    // Arrays to hold the BookCard components
     const ToBeReadListBookCards= [];
     const ReadListBookCards= [];
     
-
+    // Fetch user profile info on component mount
     useEffect(() => {
         fetch('/user_profile_info')
         .then(response => response.json())
@@ -44,6 +47,7 @@ function UserProfilePage() {
 
     if (tobereadlist) {
         for (const currentBookCard of tobereadlist) {
+            // Create a BookCard component for each book in the To Be Read list
             ToBeReadListBookCards.push(
                 <BookCard
                     bookId={currentBookCard.book_id}
@@ -59,6 +63,7 @@ function UserProfilePage() {
 
     if (readlist) {
         for (const currentBookCard of readlist) {
+            // Create a BookCard component for each book in the Read list
             ReadListBookCards.push(
                 <BookCard
                     bookId={currentBookCard.book_id}
@@ -86,7 +91,7 @@ function UserProfilePage() {
         // Add the book to the new list
         const updatedNewList = [...newList, bookToMove];
 
-        // Update the state with the new lists
+        // Update the state with the new lists and calculate the current percentage
         if (currentListName === 'readlist') {
             setReadList(updatedCurrentList);
             setToBeReadList(updatedNewList);
@@ -109,19 +114,20 @@ function UserProfilePage() {
             }),
         })
             .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
             }
             })
             .catch(error => {
-            console.error('Error updating book list:', error);
-            // If the server request fails, revert the state to the original lists
-            setReadList(readlist);
-            setToBeReadList(tobereadlist);
+                console.error('Error updating book list:', error);
+                // If the server request fails, revert the state to the original lists
+                setReadList(readlist);
+                setToBeReadList(tobereadlist);
             });
 
     }
 
+    // Render the component
     return (
     <React.Fragment>
         <nav>
