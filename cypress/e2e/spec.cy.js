@@ -25,17 +25,17 @@ describe('User Profile', () => {
       .click(); 
   });
 
-  it('Should Display usernames reading progress', () => {
+  it('Should Display usernames reading progress in title', () => {
     cy.contains('.title h1', "reading progress").should('exist');
   });
 
-  it('Should Display To Be Read List', () => {
+  it('Should Display To Be Read List Title', () => {
     cy.get('.alt_child h2')
     .first()
     .should('contain', 'To Be Read:');
   });
 
-  it('Should Display Read List', () => {
+  it('Should Display Read List Title', () => {
     cy.get('.alt_child h2')
     .last()
     .should('contain', 'Read:');
@@ -47,7 +47,7 @@ describe('User Profile', () => {
       .should('be.visible');
   });
 
-  it('Should Display Percent', () => {
+  it('Should Display Percentage', () => {
     cy.get('.title .row').should('contain', '%');
   });
 });
