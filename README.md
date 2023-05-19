@@ -38,6 +38,7 @@ ReadLikeRory V.2 was created by Karen G. Cecena. Learn more about the developer 
 - HTML5
 - CSS3
 - Bootstrap
+- Cypress.io
 
 
 ## 🔍 <a name="features"></a>Features
@@ -57,6 +58,10 @@ After creating an account, a user can log in and see their profile. In their pro
 ![alt text](https://github.com/karengcecena/ReadLikeRory-React/blob/main/static/img/user_prof2.gif "ReadLikeRory Profile Page Remove")
 
 Similarly, users can remove dynamically books they have read via the "Mark as To Be Read" if they want to add it to the TBR to re-read it. 
+
+![alt text](https://github.com/karengcecena/ReadLikeRory-React/blob/main/static/img/tests.jpeg "ReadLikeRory Cypress Tests")
+
+I also incorporated Cypress.io for testing to ensure User Page shows main features once logged in.
 
 
 ## 🗂️ <a name="databasemodel"></a>Database Model
