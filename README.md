@@ -5,7 +5,7 @@
 **ReadLikeRory V.2** is a full-stack web app where book lovers and Gilmore Girls fans can create an account that automatically adds Rory’s Read List to their To Be Read Books, then add them to their Read List once read. I recreated the front-end of this project with the framework React. 
 
 ## 📋 Content
-* [Deployment](#deployment)
+* [V1](#V1)
 * [About the Developer](#aboutme)
 * [Tech Stack](#technologies)
 * [Features](#features)
@@ -13,11 +13,7 @@
 * [Installation](#installation)
 
 
-## 🌐 <a name="deployment"></a>Deployment
-
-* Deployed using AWS Lightsail
-
-* Check out ReadLikeRory V.2's [Website](http://readlikerory.link/)
+## 🌐 <a name="V1"></a>V1
 
 * ReadLikeRory V.1's [GitHub](https://github.com/karengcecena/ReadLikeRory)
 
